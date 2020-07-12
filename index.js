@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Tuya = require('tuyapi');
 var rnd = require('id-16');
 var express = require('express');
@@ -16,8 +17,8 @@ app.get('/', function (req, res) {
 app.use(express.static('views'));
 
 const device = new Tuya({
-  id: '76670400dc4f22722278',
-  key: '23f221c25c8f7b67',
+  id: process.env.DEVICE_ID,
+  key: process.env.DEVICE_KEY,
 });
 
 function connect(dps, value) {
@@ -49,23 +50,29 @@ device.on('data', (data) => {
 
 app.get('/api/on', (req, res) => {
   connect(20, true);
+  return res.send('Success');
 });
 
 app.get('/api/off', (req, res) => {
   connect(20, false);
+  return res.send('Success');
 });
 
 app.get('/api/white', (req, res) => {
   connect(21, 'white');
+  return res.send('Success');
 });
 
 app.get('/api/colour', (req, res) => {
   connect(21, 'colour');
+  return res.send('Success');
 });
 
 app.get('/api/police', async (req, res) => {
+  res.send('Success');
   await device.find();
   await device.connect();
+  await device.set({ dps: 21, set: 'colour' });
   for (let i = 0; i < 15; i++) {
     console.log(`Loop ${i}`);
     await device.set({ dps: 24, set: colors.red });
@@ -74,6 +81,14 @@ app.get('/api/police', async (req, res) => {
     await delay(900);
   }
   await device.disconnect();
+});
+
+app.get('/api/status', async (req, res) => {
+  await device.find();
+  await device.connect();
+  await device.get();
+  await device.disconnect();
+  return res.send('Success');
 });
 
 app.listen(port);

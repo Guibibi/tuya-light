@@ -18,4 +18,8 @@ $(function () {
   $('#police').on('click', () => {
     fetch('/api/police');
   });
+
+  $('#status').on('click', () => {
+    fetch('/api/status');
+  });
 });
