@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "web": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +18,8 @@
     "id-16": "^1.0.5",
     "nodemon": "^2.0.4",
     "tuyapi": "github:codetheweb/tuyapi"
+  },
+  "engines": {
+    "node": "12.16.1"
   }
 }
