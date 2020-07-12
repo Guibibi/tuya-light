@@ -34,4 +34,8 @@ $(function () {
   $('#night').on('click', () => {
     fetch('/api/night');
   });
+
+  $('#rain').on('click', () => {
+    fetch('/api/rain');
+  });
 });

@@ -49,31 +49,30 @@ device.on('data', (data) => {
 
 app.get('/api/on', (req, res) => {
   connect(20, true);
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/off', (req, res) => {
   connect(20, false);
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/white', (req, res) => {
   connect(21, 'white');
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/colour', (req, res) => {
   connect(21, 'colour');
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/police', async (req, res) => {
-  res.send('Success');
   await device.find();
   await device.connect();
+  res.status(200).send('Success');
   await device.set({ dps: 21, set: 'colour' });
   for (let i = 0; i < 15; i++) {
-    console.log(`Loop ${i}`);
     await device.set({ dps: 24, set: colors.red });
     await delay(900);
     await device.set({ dps: 24, set: colors.blue });
@@ -87,7 +86,7 @@ app.get('/api/status', async (req, res) => {
   await device.connect();
   await device.get();
   await device.disconnect();
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/lower-white', async (req, res) => {
@@ -100,7 +99,7 @@ app.get('/api/lower-white', async (req, res) => {
   } else if (bright < 99) {
     await device.set({ dps: 22, set: 10 });
   }
-  return res.send('Success');
+  return res.status(200).send('Success');
 });
 
 app.get('/api/up-white', async (req, res) => {
@@ -117,11 +116,27 @@ app.get('/api/up-white', async (req, res) => {
   if (bright < 1001) {
     await device.set({ dps: 22, set: bright });
   }
-  return res.send('Success');
+  return res.status(200).status(200).send('Success');
 });
 
 app.get('/api/night', (req, res) => {
   connect(21, 'colour');
   connect(24, colors.night);
+  return res.status(200).send('Success');
 });
+
+app.get('/api/rain', async (req, res) => {
+  res.status(200).send('Success');
+  await device.find();
+  await device.connect();
+  await device.set({ dps: 21, set: 'colour' });
+  for (let i = 0; i < 15; i++) {
+    await device.set({ dps: 24, set: colors.teal });
+    await delay(6500);
+    await device.set({ dps: 24, set: colors.tealMid });
+    await delay(3300);
+  }
+  await device.disconnect();
+});
+
 app.listen(process.env.PORT || 3010);
