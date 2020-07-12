@@ -10,16 +10,18 @@ const delay = require('delay');
 const app = express();
 const port = 3009;
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/index.html'));
-});
-
-app.use(express.static('views'));
-
 const device = new Tuya({
   id: process.env.DEVICE_ID,
   key: process.env.DEVICE_KEY,
 });
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/views/index.html'));
+  console.log(device);
+  console.log(process.env.DEVICE_ID, process.env.DEVICE_KEY);
+});
+
+app.use(express.static('views'));
 
 function connect(dps, value) {
   device.find().then(() => {
