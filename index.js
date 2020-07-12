@@ -1,6 +1,5 @@
 require('dotenv').config();
 const Tuya = require('tuyapi');
-var rnd = require('id-16');
 var express = require('express');
 var path = require('path');
 const chalk = require('chalk');
