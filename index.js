@@ -108,6 +108,12 @@ app.get('/api/up-white', async (req, res) => {
   await device.connect();
   const brightness = await device.get({ dps: 22 });
   let bright = brightness + 100;
+
+  // Thats some real lazy stuff
+  if ((bright = 910)) {
+    bright = 1000;
+  }
+
   if (bright < 1001) {
     await device.set({ dps: 22, set: bright });
   }

@@ -2,31 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guibibi Light</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/8.0.0/cash.min.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div>
-        <button id='on'>Turn on</button>
-        <button id="off">Turn off</button>
-        <button id="status">Status</button>
-    </div>
-    <div>
-        <button id="white">White</button>
-        <button id="colour">Colour</button>
-        <button id="lower-white">Lower brightness</button>
-        <button id="up-white">Up brightness</button>
-    </div>
-    <div>
-        <button id="police">Police light</button>
-        <button id="night">Night mode</button>
+    <div class="container mx-auto px-4">
+        <div class='py-2'>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="on">
+                Turn on
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="off">
+                Turn off
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="status">
+                Status
+            </button>
+        </div>
+        <div class="py-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="white">
+                White
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="colour">
+                Colour
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="lower-white">
+                Lower brightness
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="up-white">
+                Up brightness
+            </button>
+        </div>
+        <div class="py-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="police">
+                Police light
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" id="night">
+                Night mode
+            </button>
+        </div>
     </div>
 </body>
-
 
 </html>
