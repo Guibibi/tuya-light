@@ -91,4 +91,4 @@ app.get('/api/status', async (req, res) => {
   return res.send('Success');
 });
 
-app.listen(port);
+app.listen(process.env.PORT);
