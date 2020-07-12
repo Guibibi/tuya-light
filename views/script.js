@@ -22,4 +22,16 @@ $(function () {
   $('#status').on('click', () => {
     fetch('/api/status');
   });
+
+  $('#lower-white').on('click', () => {
+    fetch('/api/lower-white');
+  });
+
+  $('#up-white').on('click', () => {
+    fetch('/api/up-white');
+  });
+
+  $('#night').on('click', () => {
+    fetch('/api/night');
+  });
 });

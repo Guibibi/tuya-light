@@ -6,9 +6,9 @@ var path = require('path');
 const chalk = require('chalk');
 const colors = require('./colors');
 const delay = require('delay');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 const app = express();
-const port = 3009;
 
 const device = new Tuya({
   id: process.env.DEVICE_ID,
@@ -17,8 +17,6 @@ const device = new Tuya({
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/views/index.html'));
-  console.log(device);
-  console.log(process.env.DEVICE_ID, process.env.DEVICE_KEY);
 });
 
 app.use(express.static('views'));
@@ -93,4 +91,32 @@ app.get('/api/status', async (req, res) => {
   return res.send('Success');
 });
 
-app.listen(process.env.PORT);
+app.get('/api/lower-white', async (req, res) => {
+  await device.find();
+  await device.connect();
+  const brightness = await device.get({ dps: 22 });
+  let bright = brightness - 100;
+  if (bright > 99) {
+    await device.set({ dps: 22, set: bright });
+  } else if (bright < 99) {
+    await device.set({ dps: 22, set: 10 });
+  }
+  return res.send('Success');
+});
+
+app.get('/api/up-white', async (req, res) => {
+  await device.find();
+  await device.connect();
+  const brightness = await device.get({ dps: 22 });
+  let bright = brightness + 100;
+  if (bright < 1001) {
+    await device.set({ dps: 22, set: bright });
+  }
+  return res.send('Success');
+});
+
+app.get('/api/night', (req, res) => {
+  connect(21, 'colour');
+  connect(24, colors.night);
+});
+app.listen(process.env.PORT || 3010);
