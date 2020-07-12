@@ -109,7 +109,7 @@ app.get('/api/up-white', async (req, res) => {
   let bright = brightness + 100;
 
   // Thats some real lazy stuff
-  if ((bright = 910)) {
+  if (bright === 910) {
     bright = 1000;
   }
 
